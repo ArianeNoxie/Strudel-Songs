@@ -1,0 +1,54 @@
+/*
+ * @title Visitors From Dreams
+ * @by Timothy Lamb & Mathieu Stempell
+ * @details Community effort to recreate it in Strudel!
+ *          og available here https://youtu.be/0IlwxSqYaU4
+ *          add your name below:
+ *          - Noxie
+ */
+
+await initHydra({feedStrudel:1})
+
+let cpm = 125/4;
+
+let arpegio_key = arrange(
+  [1, "<<a4!2 as4!2> d5 e5 d5 <a4!2 as4!2> d5 e5 f5>*8"]
+)
+  .note()
+  ._pianoroll()
+  .sound("gm_lead_2_sawtooth:4")
+  .distort("<1.5:.5>")
+  .attack(0).decay(0.20).release(0.5)
+  .hpf("<8000 7000 5000 2000 800 300 100 20 100 300 800 2000 5000 7000 8000>*2")
+  .delay("0.45:0.088:0.5")
+  .room(0.4)
+  ;
+
+let high_key = arrange(
+  [2, "<a6*1 g6*1 >"],
+)
+  .note().sound("gm_lead_2_sawtooth:4")
+  .distort("<3:.5>")
+  .attack(0).decay(1).release(.6)
+  ;
+
+let bass = arrange(
+  [1, "<7 ~ 7 ~ 7 7 ~ 7 7@2 6@2>"],
+)
+  .fast(16)
+  .scale("d1:minor").note()
+  ._pianoroll( )
+  .sound("gm_synth_bass_2:7")
+  .distort("<10:0.2>")
+  .attack(0.01).decay(0.35).release(0.025)
+  ._scope()
+  ;
+
+
+stack(
+  arpegio_key,
+  //high_key
+  bass,
+)
+  .cpm(cpm)
+  ;
